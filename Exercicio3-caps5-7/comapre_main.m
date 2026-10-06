@@ -71,6 +71,7 @@ subplot(3,2,6);imagesc(engy2);colorbar;title('Amplitude after rescale')
 % [x2,z2]=ginput(n_refl);    % here we use "ginput" function to pick the location of the reflector points. The picked results are saved in x2 and z2, respectively
 
 % ler de um arquivo .mat ja pronto que fiz
+% como eu fiz? apos escolher os pontos e executar o script, use: xzpicks.mat x z x2 z2
 load 'xzpicks'
 x = xzpicks{1}; z = xzpicks{2};
 x2 = xzpicks{3}; z2 = xzpicks{4};
