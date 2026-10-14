@@ -148,7 +148,8 @@ disp('Classify every image point in the migration image')
 mig_result1=zeros(size(mig));  % mig_result1 has the same size as the migration image will save the predicted result
 for ix=1:nx
     for iz=1:nz
-     janela = montar_janela(mig, ix, iz, winx, winz);
+     janela = montar_janela(zeros(1, winx * winz), 1, 1, ix, iz, ...
+                            mig, winx, winz);
      janela = (janela - X_mean) ./ X_scale;
      p = sigmoid([1 janela] * theta);
      mig_result1(iz,ix) = p > 0.5;
@@ -243,7 +244,8 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 mig_result2 = zeros(size(mig));
 for ix=1:nx
   for iz=1:nz
-    janela = montar_janela(mig, ix, iz, winx, winz);
+    janela = montar_janela(zeros(1, winx * winz), 1, 1, ix, iz, ...
+                           mig, winx, winz);
     janela = (janela - X_mean) ./ X_scale;
     val = [1 janela];
     h1 = sigmoid(val * Theta1');
@@ -298,7 +300,8 @@ ww=model.w;  % model.w is the trained bias term
 mig_result3=zeros(size(mig));
 for ix=1:nx
     for iz=1:nz
-        janela = montar_janela(mig, ix, iz, winx, winz);
+        janela = montar_janela(zeros(1, winx * winz), 1, 1, ix, iz, ...
+                               mig, winx, winz);
         janela = (janela - X_mean) ./ X_scale;
         val2 = svmPredict2(model, janela);
         mig_result3(iz,ix) = val2;
