@@ -21,6 +21,7 @@ Na arquitetura original, a rede possui as seguintes camadas
 - Sub-amostragem 2: escala 2 (saída: 5x5)
 - Entradas na camada totalmnnte conectadas: 5 * 5 * 12 = 300
 
+![Classificação com trincas pequenas](imagens/test_example_CNN_1-small_cracks_train.jpg)
 
 **Modify the structure of CNN. See how the CNN parameter will change the result.**
 
@@ -41,9 +42,17 @@ Resumindo, as mudanças foram:
 
 Com `opts.numepochs = 10`, essa nova configuracao prevê a mesma classe para todos os pixels. Então, o resultado da inferência é um painel todo em ciano. Ou seja, o treinamento "colapsa" para apenas uma classe.
 
+![Classificação com 10 épocas](imagens/test_example_CNN_2-small_cracks_train_10epochs.jpg)
+
+![Curva de misfit com 10 épocas](imagens/test_example_CNN_2-small_cracks_train_10epochs_misfit.jpg)
+
 **Increase the iteration number to 100. How the result will change? Why? Is there anyway to prevent this problem.**
 
 Utilizando o mesmo script `test_example_CNN_2.m`, mas com `opts.numepochs = 100`, o "colapso" da rede é superado e ela volta a separar as regiões com e sem trincas.
+
+![Classificação com 100 épocas](imagens/test_example_CNN_2-small_cracks_train_100epochs.jpg)
+
+![Curva de misfit com 100 épocas](imagens/test_example_CNN_2-small_cracks_train_100epochs_misfit.jpg)
 
 Isso acontece porque a camada totalmente conectada tem quase o dobro de entradas (576 contra 300) e mais pesos para ajustar. Pelas curvas de erro (*misfit*), habilitadas pelo comando `plot(cnn.rL)`, pode-se concluir que
 
@@ -71,6 +80,8 @@ As mudanças foram:
 O resultado é mostrado na figura abaixo:
 
 ![Classificação multi-classe](imagens/test_example_CNN_3-multiclass.jpg)
+
+![Curva de misfit multi-classe](imagens/test_example_CNN_3-multiclass_misfit.jpg)
 
 Interpretação:
 
