@@ -21,7 +21,9 @@ Na arquitetura original, a rede possui as seguintes camadas
 - Sub-amostragem 2: escala 2 (saída: 5x5)
 - Entradas na camada totalmnnte conectadas: 5 * 5 * 12 = 300
 
-![Classificação com trincas pequenas](imagens/test_example_CNN_1-small_cracks_train.jpg)
+| Classificação |
+|:---:|
+| ![Classificação com trincas pequenas](imagens/test_example_CNN_1-small_cracks_train.jpg) |
 
 **Modify the structure of CNN. See how the CNN parameter will change the result.**
 
@@ -42,17 +44,17 @@ Resumindo, as mudanças foram:
 
 Com `opts.numepochs = 10`, essa nova configuracao prevê a mesma classe para todos os pixels. Então, o resultado da inferência é um painel todo em ciano. Ou seja, o treinamento "colapsa" para apenas uma classe.
 
-![Classificação com 10 épocas](imagens/test_example_CNN_2-small_cracks_train_10epochs.jpg)
-
-![Curva de misfit com 10 épocas](imagens/test_example_CNN_2-small_cracks_train_10epochs_misfit.jpg)
+| Classificação (10 épocas) | Curva de misfit |
+|:---:|:---:|
+| ![Classificação (10 épocas)](imagens/test_example_CNN_2-small_cracks_train_10epochs.jpg) | ![Curva de misfit](imagens/test_example_CNN_2-small_cracks_train_10epochs_misfit.jpg) |
 
 **Increase the iteration number to 100. How the result will change? Why? Is there anyway to prevent this problem.**
 
 Utilizando o mesmo script `test_example_CNN_2.m`, mas com `opts.numepochs = 100`, o "colapso" da rede é superado e ela volta a separar as regiões com e sem trincas.
 
-![Classificação com 100 épocas](imagens/test_example_CNN_2-small_cracks_train_100epochs.jpg)
-
-![Curva de misfit com 100 épocas](imagens/test_example_CNN_2-small_cracks_train_100epochs_misfit.jpg)
+| Classificação (100 épocas) | Curva de misfit |
+|:---:|:---:|
+| ![Classificação (100 épocas)](imagens/test_example_CNN_2-small_cracks_train_100epochs.jpg) | ![Curva de misfit](imagens/test_example_CNN_2-small_cracks_train_100epochs_misfit.jpg) |
 
 Isso acontece porque a camada totalmente conectada tem quase o dobro de entradas (576 contra 300) e mais pesos para ajustar. Pelas curvas de erro (*misfit*), habilitadas pelo comando `plot(cnn.rL)`, pode-se concluir que
 
@@ -79,15 +81,12 @@ As mudanças foram:
 
 O resultado é mostrado na figura abaixo:
 
-![Classificação multi-classe](imagens/test_example_CNN_3-multiclass.jpg)
+| Classificação (3 classes) | Curva de misfit |
+|:---:|:---:|
+| ![Classificação (3 classes)](imagens/test_example_CNN_3-multiclass.jpg) | ![Curva de misfit](imagens/test_example_CNN_3-multiclass_misfit.jpg) |
 
-![Curva de misfit multi-classe](imagens/test_example_CNN_3-multiclass_misfit.jpg)
+As trincas grandes, as fraturas claras e largas na região central da imagem (entre os pixels 200 e 650 em x), foram bem identificadas como `big_crack`, visto que a rede reproduz a geometria da rede de fraturas principal, inclusive suas ramificações.
 
-Interpretação:
+A classe `small_crack` aparece em faixas finas e alongadas espalhadas pelo fundo, o que é coerente com as fraturas pequenas da imagem. No entanto, ela também aparece em manchas sem uma forma de trinca bem definida, principalmente no lado esquerdo. Isso indica confusão entre `small_crack` e variações de textura do `background`.
 
-- As trincas grandes, as fraturas claras e largas na região central da imagem (entre os pixels 200 e 650 em x), foram bem identificadas como `big_crack`. A rede reproduz a geometria da rede de fraturas principal, inclusive suas ramificações.
-- O fundo escuro, à esquerda e no centro da imagem, foi classificado em grande parte como `background`.
-- A classe `small_crack` aparece em faixas finas e alongadas espalhadas pelo fundo, o que é coerente com as fraturas pequenas da imagem. No entanto, ela também aparece em manchas sem uma forma de trinca bem definida, principalmente no lado esquerdo. Isso indica confusão entre `small_crack` e variações de textura do `background`.
-- A região à direita (x > 700), onde a rocha é mais clara, foi classificada quase toda como `big_crack` e `small_crack`, embora não seja uma trinca. A rede associa as trincas grandes principalmente à intensidade alta dos pixels, e não à forma da fratura. Como poucos (ou nenhum) pontos de `background` foram marcados nessa região, a rede não aprendeu que rocha clara também pode ser fundo.
-
-Assim, a separação entre `background` e `big_crack` funciona bem onde o contraste é alto, mas a classe intermediária (`small_crack`) e as regiões claras sem trincas são as principais fontes de erro. Para melhorar o resultado, é possível incluir pontos de `background` na região clara da direita, aumentar o número de épocas (como em `test_example_CNN_2.m`) e aumentar o conjunto de treino da classe `small_crack`.
+A região à direita (x > 700), onde a rocha é mais clara, foi classificada quase toda como `big_crack` e `small_crack`, embora não seja uma trinca. Isso implica que a rede associa as trincas grandes principalmente à intensidade alta dos pixels, e não à forma da fratura.
