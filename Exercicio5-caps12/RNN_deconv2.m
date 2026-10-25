@@ -5,27 +5,19 @@ for ii=1:100
     y(1,20*ii)=2*rand(1)-1;
 end
 
-% y(1,20)=1;
-% y(1,40)=0.5;
-% y(1,60)=-0.5;
-% y(1,80)=-0.2;
-% y(1,100)=0.6;
-% y(1,120)=0.2;
-% y(1,140)=-0.3;
-% y(1,160)=-1;
-% y(1,180)=0.8;
  rick=ricker(1000,1,0.1);
 x_conv=conv(rick,y);
 x(1,1:2000)=x_conv(1,11:2010);
 
-%n=x;m=y;y=n;x=m;
-% x(1,:)=1:400;
-% y(1,:)=sind(1:400);
 x = con2seq(x);
 y = con2seq(y);
 
 % Setup RNN Network
-lrn_net = layrecnet(1,[10],'trainlm');%layrecnet(layerDelays,hiddenSizes,trainFcn) 
+% Original structure (RNN_deconv.m): one hidden layer with 10 neurons
+%   lrn_net = layrecnet(1,[10],'trainlm');
+% Modified structure: two hidden layers with 10 neurons each,
+% each one with its own recurrent connection (delay 1)
+lrn_net = layrecnet(1,[10 10],'trainlm');%layrecnet(layerDelays,hiddenSizes,trainFcn)
 view(lrn_net)
 
 % Setup RNN parameters
@@ -67,7 +59,7 @@ test_y(1,120)=0.9;
 test_y(1,140)=-0.8;
 test_y(1,160)=-0.3;
 test_y(1,180)=0.5;
-rick=ricker(1000,0.5,0.1);
+rick=ricker(1000,1,0.1);
 test_x_conv=conv(rick,test_y);
 test_x(1,1:200)=test_x_conv(1,11:210);
 % Run RNN on test data
