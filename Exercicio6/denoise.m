@@ -17,7 +17,8 @@ load b.mat % load 5 common shot gathers (portions)
 b=b(1:100,:,2); % chose the first one to learing the filters
 x=local_contrast_normalization(b,21); % do local contrast normalization
 
-%%% add noise to the csg 
+%%% add noise to the csg
+rng(0); % fixa a semente: mesma realizacao de ruido (e mesmo SNR) em toda execucao
 n3=size(x,3); % zero mean
 for img=1:n3
     tmp=x(:,:,img);

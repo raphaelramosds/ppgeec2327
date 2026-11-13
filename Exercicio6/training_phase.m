@@ -6,7 +6,8 @@
 clear;
 close all;
 tic();
-% 
+rng(0); % fixa a semente para inicializacao aleatoria reprodutivel de d e z
+%
 %
 % *INPUT PARAMETERS* :
 % x                 Input data with size of n1*n2*n3, where n1*n2 is the  image size and n3 is the number of the images
@@ -24,12 +25,14 @@ end
 % figure;
 % imagesc(x(:,:,1));title('Original CSG');colormap gray; %plot the images x
 % filter_size       Size of filters: n1*n2*n3, where n1*n2 is the size for the single filter and n3 is the number of the filters
+% filter_size = [21,11,3];
 filter_size = [21,11,3];
 fprintf('Doing sparse coding filter learning for k = %d [%d x %d] filters.\n\n', filter_size(3), filter_size(1), filter_size(2) )
 % ambda_residual   The coefficient before the first term 1/2||b- \sum_i d_i*z_i||^2_2
 lambda_residual = 1.0;
 % beta            The coefficient before the second term \sum_i ||z_i||_1
-beta = 1.0;
+% beta = 1.0;
+beta = 5.0;
 % max_it            The maximum iteration number
 max_it = [80];
 % tol               Tolerenace to stop the iteration
@@ -71,6 +74,7 @@ imagesc(d_disp), colormap gray,
 axis image, colorbar, title('Final filter estimate');
 
 %% Display filters, feature maps and their convolution results
+%{
 % load('filters_ours_obj467.mat')
 psf_radius = floor(size(d,1)/2);
 psf_radius_2=floor(size(d,2)/2);
@@ -106,4 +110,5 @@ for ifilter=1:size(z,3)
     title(['$\bf b_',num2str(ifilter),'* z_',num2str(ifilter),'$'],'interpreter','latex');
     set(gca,'FontSize',fontsize);
 end
+%}
 
