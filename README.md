@@ -15,7 +15,7 @@ Exercícios da disciplina, baseados nos laboratórios do curso de *Machine Learn
 
 ---
 
-## Exercício 1 — Caps. 2 e 3: Otimizadores na função de Rosenbrock
+## [![Exercicio1-caps2-3](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio1-caps2-3/) Exercício 1 — Caps. 2 e 3: Otimizadores na função de Rosenbrock
 
 Comparação de três otimizadores, implementados em Python, na minimização da função de Rosenbrock, cujo mínimo global em (1, 1) fica num vale estreito e quase plano cercado por paredes íngremes:
 
@@ -30,7 +30,7 @@ Comparação de três otimizadores, implementados em Python, na minimização da
   <img src="Exercicio1-caps2-3/imagens/adam-padrao.png" height="180" alt="Adam com configuração padrão">
 </p>
 
-## Exercício 2 — Cap. 4: Redes neurais totalmente conectadas
+## [![Exercicio2-cap4](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio2-cap4/) Exercício 2 — Cap. 4: Redes neurais totalmente conectadas
 
 Implementação e análise de redes *feed-forward* treinadas por gradiente descendente:
 
@@ -39,20 +39,27 @@ Implementação e análise de redes *feed-forward* treinadas por gradiente desce
 - **Classificação multiclasse** (`NNode_multiclass.m`): Exemplo 4.4.2, comparando ativações sigmoide e ReLU e diferentes profundidades.
 
 <p align="center">
-  <img src="Exercicio2-cap4/imagens/NNode1-418-resultados.jpg" height="280" alt="Classificação binária">
-  <img src="Exercicio2-cap4/imagens/NNode_multiclass-5666-relu.jpg" height="280" alt="Classificação multiclasse com ReLU">
+  <img src="Exercicio2-cap4/imagens/NNode_multiclass-5666-relu.jpg" width="700" alt="Classificação multiclasse com ReLU">
 </p>
 
-## Exercício 3 — Caps. 5 a 7: Filtragem de ruídos de migração (FCNN vs. SVM)
+## [![Exercicio3-caps5-7](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio3-caps5-7/) Exercício 3 — Caps. 5 a 7: Filtragem de ruídos de migração (FCNN vs. SVM)
 
 Comparação entre uma FCNN e uma SVM com kernel RBF na classificação de pontos de uma imagem de migração sísmica em **refletores** ou **artefatos** (arcos de difração). A máscara obtida é usada para filtrar a migração. Foram testados conjuntos de treino desbalanceados (3 refletores vs. 50 artefatos) e o uso de atributos de janela em torno de cada ponto.
+
+Os atributos usados como entrada (amplitude, coerência e fase/ângulo local) podem ser visualizados com `visualizar_secao.m`:
+
+<p align="center">
+  <img src="Exercicio3-caps5-7/imagens/secao-amplitude-coerencia-fase.jpg" width="700" alt="Seção migrada original e seus atributos de amplitude, coerência e fase">
+</p>
+
+Na seção migrada original aparecem três refletores (um horizontal e dois inclinados) que partem de x ≈ 40, cercados por arcos de difração que são artefatos da migração. Os atributos realçam essa diferença: a amplitude e a coerência são altas ao longo dos refletores e quase nulas nos arcos. Já a fase (ângulo local) é aproximadamente constante sobre cada refletor e varia de forma desordenada nas regiões dominadas pelos artefatos. Cada ponto da imagem é descrito por esses três atributos e classificado como refletor ou artefato. As figuras abaixo mostram a classificação obtida com o treino desbalanceado e a migração filtrada com atributos de janela:
 
 <p align="center">
   <img src="Exercicio3-caps5-7/imagens/compare-nrefl3-narti50.jpg" height="280" alt="Classificação dos pontos">
   <img src="Exercicio3-caps5-7/imagens/compare-janela-nrefl50-narti50-migracao.jpg" height="280" alt="Migração filtrada">
 </p>
 
-## Exercício 4 — Caps. 8 e 9: CNN para detecção de trincas
+## [![Exercicio4-caps8-9](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio4-caps8-9/) Exercício 4 — Caps. 8 e 9: CNN para detecção de trincas
 
 Classificação de trincas em fotos de afloramentos geológicos com redes convolucionais. Foram explorados a escolha manual do conjunto de treino, alterações na arquitetura da CNN, o efeito do número de épocas (o "colapso" da rede com 10 épocas e sua recuperação com 100) e a classificação multiclasse (`big_crack`, `small_crack` e `background`).
 
@@ -61,7 +68,7 @@ Classificação de trincas em fotos de afloramentos geológicos com redes convol
   <img src="Exercicio4-caps8-9/imagens/test_example_CNN_3-multiclass.jpg" height="280" alt="Classificação multiclasse de trincas">
 </p>
 
-## Exercício 5 — Cap. 12: Redes neurais recorrentes
+## [![Exercicio5-cap12](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio5-cap12/) Exercício 5 — Cap. 12: Redes neurais recorrentes
 
 Uso de RNNs para problemas de séries temporais em sísmica:
 
@@ -70,11 +77,12 @@ Uso de RNNs para problemas de séries temporais em sísmica:
 3. **LSTM** (`RNN_binary_lstm.m`): soma binária, ilustrando como a célula de memória lida com dependências longas ("vai um").
 
 <p align="center">
-  <img src="Exercicio5-cap12/imagens/RNN_deconv_2_test.jpg" height="280" alt="Deconvolução com RNN de 2 camadas">
-  <img src="Exercicio5-cap12/imagens/RNN_binary_lstm.jpg" height="280" alt="Soma binária com LSTM">
+  <img src="Exercicio5-cap12/imagens/RNN_deconv_2_test.jpg" width="700" alt="Deconvolução com RNN de 2 camadas">
+  <br>
+  <img src="Exercicio5-cap12/imagens/RNN_binary_lstm.jpg" width="700" alt="Soma binária com LSTM">
 </p>
 
-## Exercício 6 — *Sparse coding* convolucional
+## [![Exercicio6](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio6/) Exercício 6 — *Sparse coding* convolucional
 
 Remoção de ruído de um sismograma com *convolutional sparse coding* (CSC), resolvido por ADMM. Foram avaliados o tamanho e o número de filtros do dicionário e o peso β da norma ℓ1, medindo a SNR do resultado. Por fim, os filtros aprendidos pelo CSC foram comparados aos da primeira camada de uma CNN treinada no mesmo dado.
 
