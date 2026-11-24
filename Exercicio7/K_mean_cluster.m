@@ -47,7 +47,9 @@ end
 
 %(4.1) Initialize
 %%%%%%%%%%%%%%%%%
-num_cluster=15;                    % Set the initial number of cluster
+% num_cluster=15;   % padrao
+% num_cluster=6;    % otimo
+num_cluster=9;      % um pouco acima do otimo
 dx=floor(n_vel/(num_cluster+1));   % Set the initial location of each cluster centroid
 dz=floor(nt/(num_cluster+1));
 central=zeros(num_cluster,2);      % Matrix used to saved each cluster central

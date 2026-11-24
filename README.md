@@ -12,6 +12,7 @@ Exercícios da disciplina, baseados nos laboratórios do curso de *Machine Learn
 | [4](#exercício-4--caps-8-e-9-cnn-para-detecção-de-trincas) | CNN para detecção de trincas em afloramentos | [Exercicio4_caps8_9](Exercicio4-caps8-9/Exercicio4_caps8_9_Raphael_Ramos.ipynb) |
 | [5](#exercício-5--cap-12-redes-neurais-recorrentes) | Redes neurais recorrentes (RNN e LSTM) | [Exercicio5_cap12](Exercicio5-cap12/Exercicio5_cap12_Raphael_Ramos.ipynb) |
 | [6](#exercício-6--sparse-coding-convolucional) | *Sparse coding* convolucional (CSC) | [Exercicio6](Exercicio6/Exercicio6_Raphael_Ramos.ipynb) |
+| [7](#exercício-7--picking-automático-de-velocidade-com-k-means) | *Picking* automático de velocidade com K-means | [Exercicio7](Exercicio7/Exercicio7_Raphael_Ramos.ipynb) |
 
 ---
 
@@ -91,8 +92,15 @@ Remoção de ruído de um sismograma com *convolutional sparse coding* (CSC), re
   <img src="Exercicio6/imagens/q2/csc_vs_cnn.jpg" height="280" alt="Filtros CSC vs. CNN">
 </p>
 
----
+## [![Exercicio7](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](Exercicio7/) Exercício 7 — *Picking* automático de velocidade com K-means
 
-### Execução
+*Picking* automático de um espectro de velocidade (semblance) com K-means. Os pontos de alta semblance são agrupados usando apenas suas coordenadas (velocidade, tempo), e cada centróide vira um *pick* da função de velocidade NMO.
 
-O Exercício 1 é um notebook Python autocontido. Os demais foram escritos para MATLAB: basta abrir a pasta do exercício e executar o script principal indicado na seção correspondente; os notebooks (`.ipynb`) trazem os resultados já executados e a discussão.
+- **Sem *thresholding*** (`K_mean_cluster_no_threshold.m`): como as *features* não carregam a amplitude, todos os pontos da grade formam um retângulo uniforme e os centróides colapsam numa linha vertical em ~3300 m/s, sem relação com o espectro.
+- **Escolha do número de clusters** (`K_mean_elbow.m`): pelo método do cotovelo, o misfit para de cair significativamente em K ≈ 6. Os resultados com K = 6, 9 e 15 (`K_mean_cluster.m`) mostram o compromisso entre resolução da função de velocidade e robustez.
+
+<p align="center">
+  <img src="Exercicio7/imagens/pick_result_no_threshold.jpg" height="280" alt="Picking sem thresholding">
+  <img src="Exercicio7/imagens/pick_elbow.jpg" height="280" alt="Método do cotovelo">
+  <img src="Exercicio7/imagens/pick_result_k9.jpg" height="280" alt="Picking com K = 9">
+</p>
